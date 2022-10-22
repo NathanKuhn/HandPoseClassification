@@ -1,10 +1,11 @@
 # HandPoseClassification
 Classification of hand poses with MediaPipe hand pose input and TensorFlow
 
-Dependencies:
+# Dependencies:
 `MediaPipe`
 `TensorFlow`
 `PyGame`
+`OpenCv`
 
 Goals:
 Put a box around the computer as well as the camera (2 boxes total) 
