@@ -1,7 +1,7 @@
 # HandPoseClassification
 Classification of hand poses with MediaPipe hand pose input and TensorFlow
 
-# Dependencies:
+Dependencies:
 `MediaPipe`
 `TensorFlow`
 `PyGame`

@@ -4,6 +4,9 @@ import pygame
 import numpy as np
 import pandas as pd
 import math
+import os
+
+DATASET_PATH = 'training_dataset/'
 
 def format_data(array):
     center_x = 0
@@ -41,7 +44,13 @@ def format_data(array):
 
 
 def main():
+
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (100, 100)
+
     cap = cv2.VideoCapture(0)
+
+    cv2.namedWindow("camera")
+    cv2.moveWindow("camera", 800, 100)
 
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
@@ -86,7 +95,7 @@ def main():
                 data_array.append(list(array) + [label])
                 print("Collected data point #", len(data_array))
         
-        cv2.imshow("display", cv2.flip(image, 1))
+        cv2.imshow("camera", cv2.flip(image, 1))
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             done = True
@@ -99,8 +108,11 @@ def main():
                 break
 
     data = pd.DataFrame(data_array)
-    print(data)
-    data.to_csv(f'training_dataset/label_{label}.csv')
+
+    files = os.listdir(DATASET_PATH)
+    file_num = len(files)
+
+    data.to_csv(DATASET_PATH + f'{file_num}_label_{label}.csv')
     cap.release()
     cv2.destroyAllWindows()
 
